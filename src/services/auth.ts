@@ -1,6 +1,19 @@
-// Auth service
 import { supabase } from '../lib/supabase';
 
-export const signIn = async () => {
-    // Implementation here
+export const signUp = async (email: string, password: string) => {
+    const { data, error } = await supabase.auth.signUp({ email, password });
+    if (error) throw error;
+    return data;
+};
+
+export const signIn = async (email: string, password: string) => {
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) throw error;
+    return data;
+};
+
+export const getUser = async () => {
+    const { data, error } = await supabase.auth.getUser();
+    if (error) throw error;
+    return data.user;
 };
